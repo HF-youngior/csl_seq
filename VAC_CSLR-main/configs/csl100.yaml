@@ -1,0 +1,6 @@
+# CSL100 Dataset Configuration
+dataset_root: "/root/autodl-tmp/SLR_dataset/color"
+dict_path: "./csl100/gloss_dict.npy"
+evaluation_dir: "./evaluation/slr_eval"
+evaluation_prefix: "csl100-groundtruth"
+evaluation_gt_dir: "./csl100"

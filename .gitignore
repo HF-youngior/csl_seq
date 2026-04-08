@@ -108,3 +108,9 @@ runs/
 
 # models
 *.pth
+
+# Custom additions for large files and models
+*.pt
+*.zip
+VAC_CSLR-main/work_dir/
+VAC_CSLR-main/csl100/*.npy

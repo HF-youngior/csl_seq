@@ -1,5 +1,6 @@
 import torch
 from sklearn.metrics import accuracy_score
+from tqdm import tqdm
 from tools import wer
 
 def val_epoch(model, criterion, dataloader, device, epoch, logger, writer):
@@ -42,7 +43,14 @@ def val_seq2seq(model, criterion, dataloader, device, epoch, logger, writer):
     all_wer = []
 
     with torch.no_grad():
-        for batch_idx, (imgs, target) in enumerate(dataloader):
+        progress = tqdm(
+            enumerate(dataloader),
+            total=len(dataloader),
+            desc="Val   Epoch {:03d}".format(epoch + 1),
+            leave=True,
+            dynamic_ncols=True,
+        )
+        for batch_idx, (imgs, target) in progress:
             imgs = imgs.to(device)
             target = target.to(device)
 
@@ -79,6 +87,11 @@ def val_seq2seq(model, criterion, dataloader, device, epoch, logger, writer):
                 target[i] = [item for item in target[i] if item not in [0,1,2]]
                 wers.append(wer(target[i], prediction[i]))
             all_wer.extend(wers)
+            progress.set_postfix(
+                loss="{:.4f}".format(loss.item()),
+                acc="{:.2f}%".format(score * 100),
+                wer="{:.2f}%".format(sum(wers) / len(wers)),
+            )
 
     # Compute the average loss & accuracy
     validation_loss = sum(losses)/len(losses)
@@ -91,3 +104,8 @@ def val_seq2seq(model, criterion, dataloader, device, epoch, logger, writer):
     writer.add_scalars('Accuracy', {'validation': validation_acc}, epoch+1)
     writer.add_scalars('WER', {'validation': validation_wer}, epoch+1)
     logger.info("Average Validation Loss of Epoch {}: {:.6f} | Acc: {:.2f}% | WER: {:.2f}%".format(epoch+1, validation_loss, validation_acc*100, validation_wer))
+    return {
+        'loss': validation_loss,
+        'acc': validation_acc,
+        'wer': validation_wer,
+    }

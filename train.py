@@ -1,5 +1,6 @@
 import torch
 from sklearn.metrics import accuracy_score
+from tqdm import tqdm
 from tools import wer
 
 def train_epoch(model, criterion, optimizer, dataloader, device, epoch, logger, log_interval, writer):
@@ -53,7 +54,14 @@ def train_seq2seq(model, criterion, optimizer, clip, dataloader, device, epoch, 
     all_pred = []
     all_wer = []
 
-    for batch_idx, (imgs, target) in enumerate(dataloader):
+    progress = tqdm(
+        enumerate(dataloader),
+        total=len(dataloader),
+        desc="Train Epoch {:03d}".format(epoch + 1),
+        leave=True,
+        dynamic_ncols=True,
+    )
+    for batch_idx, (imgs, target) in progress:
         imgs = imgs.to(device)
         target = target.to(device)
 
@@ -99,6 +107,11 @@ def train_seq2seq(model, criterion, optimizer, clip, dataloader, device, epoch, 
 
         if (batch_idx + 1) % log_interval == 0:
             logger.info("epoch {:3d} | iteration {:5d} | Loss {:.6f} | Acc {:.2f}% | WER {:.2f}%".format(epoch+1, batch_idx+1, loss.item(), score*100, sum(wers)/len(wers)))
+        progress.set_postfix(
+            loss="{:.4f}".format(loss.item()),
+            acc="{:.2f}%".format(score * 100),
+            wer="{:.2f}%".format(sum(wers) / len(wers)),
+        )
 
     # Compute the average loss & accuracy
     training_loss = sum(losses)/len(losses)
@@ -111,3 +124,8 @@ def train_seq2seq(model, criterion, optimizer, clip, dataloader, device, epoch, 
     writer.add_scalars('Accuracy', {'train': training_acc}, epoch+1)
     writer.add_scalars('WER', {'train': training_wer}, epoch+1)
     logger.info("Average Training Loss of Epoch {}: {:.6f} | Acc: {:.2f}% | WER {:.2f}%".format(epoch+1, training_loss, training_acc*100, training_wer))
+    return {
+        'loss': training_loss,
+        'acc': training_acc,
+        'wer': training_wer,
+    }

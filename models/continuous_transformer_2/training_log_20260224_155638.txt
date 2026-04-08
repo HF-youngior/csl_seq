@@ -1,0 +1,30 @@
+epoch   1 | Loss 1.541921 | Acc 48.87% | WER 0.73%
+Validation Loss: 0.585450 | Acc: 60.34% | WER: 0.58%
+epoch   2 | Loss 0.343109 | Acc 65.90% | WER 0.50%
+Validation Loss: 0.214059 | Acc: 68.70% | WER: 0.46%
+epoch   3 | Loss 0.086352 | Acc 71.65% | WER 0.42%
+Validation Loss: 0.105450 | Acc: 70.96% | WER: 0.43%
+epoch   4 | Loss 0.037985 | Acc 72.55% | WER 0.41%
+Validation Loss: 0.099833 | Acc: 71.29% | WER: 0.42%
+epoch   5 | Loss 0.024433 | Acc 72.79% | WER 0.41%
+Validation Loss: 0.064087 | Acc: 71.96% | WER: 0.42%
+epoch   6 | Loss 0.020250 | Acc 72.87% | WER 0.40%
+Validation Loss: 0.081167 | Acc: 71.73% | WER: 0.42%
+epoch   7 | Loss 0.015351 | Acc 72.97% | WER 0.40%
+Validation Loss: 0.062868 | Acc: 72.01% | WER: 0.42%
+epoch   8 | Loss 0.012654 | Acc 73.04% | WER 0.40%
+Validation Loss: 0.087350 | Acc: 71.72% | WER: 0.42%
+epoch   9 | Loss 0.011436 | Acc 73.05% | WER 0.40%
+Validation Loss: 0.046256 | Acc: 72.41% | WER: 0.41%
+epoch   10 | Loss 0.008543 | Acc 73.11% | WER 0.40%
+Validation Loss: 0.058789 | Acc: 72.14% | WER: 0.41%
+epoch   11 | Loss 0.009986 | Acc 73.07% | WER 0.40%
+Validation Loss: 0.060988 | Acc: 72.05% | WER: 0.41%
+epoch   12 | Loss 0.006413 | Acc 73.15% | WER 0.40%
+Validation Loss: 0.056529 | Acc: 72.25% | WER: 0.41%
+epoch   13 | Loss 0.005655 | Acc 73.15% | WER 0.40%
+Validation Loss: 0.041840 | Acc: 72.41% | WER: 0.41%
+epoch   14 | Loss 0.005875 | Acc 73.16% | WER 0.40%
+Validation Loss: 0.045034 | Acc: 72.43% | WER: 0.41%
+epoch   15 | Loss 0.003624 | Acc 73.21% | WER 0.40%
+Validation Loss: 0.048677 | Acc: 72.38% | WER: 0.41%

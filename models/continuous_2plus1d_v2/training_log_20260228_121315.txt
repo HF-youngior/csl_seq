@@ -1,0 +1,11 @@
+epoch 1 | Loss 2.428218 | Acc 0.76% | WER 1.25%
+Validation Loss: 3.212811 | Acc: 0.78% | WER: 1.26%
+epoch 2 | Loss 0.915795 | Acc 0.82% | WER 1.26%
+Validation Loss: 2.825095 | Acc: 0.76% | WER: 1.26%
+epoch 3 | Loss 0.521613 | Acc 0.83% | WER 1.26%
+Validation Loss: 2.465781 | Acc: 0.72% | WER: 1.26%
+epoch 4 | Loss 0.383853 | Acc 0.82% | WER 1.26%
+Validation Loss: 2.328958 | Acc: 0.74% | WER: 1.26%
+epoch 5 | Loss 0.308170 | Acc 0.82% | WER 1.26%
+Validation Loss: 2.352439 | Acc: 0.73% | WER: 1.26%
+epoch 6 | Loss 0.247450 | Acc 0.83% | WER 1.25%

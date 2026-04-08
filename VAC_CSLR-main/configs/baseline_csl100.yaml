@@ -1,0 +1,76 @@
+# 配置文件
+model: "slr_network.SLRModel"
+feeder: "dataset.dataloader_csl.CSLFeeder"
+# device: "0,1,2,3"
+device: "0"
+work_dir: "./work_dir/csl100_baseline"
+dataset: "csl100"
+phase: "train"
+random_fix: true
+random_seed: 1
+print_log: true
+log_interval: 100
+load_weights: ""
+load_checkpoints: ""
+ignore_weights: []
+evaluate_tool: "python"
+decode_mode: "beam"
+num_epoch: 10
+batch_size: 3
+test_batch_size: 3
+save_interval: 1
+eval_interval: 1
+num_worker: 1
+
+optimizer_args:
+  optimizer: "Adam"
+  base_lr: 0.0001
+  weight_decay: 0.0001
+  start_epoch: 0
+  step: [10,20,30]
+  gamma: 0.1
+
+loss_weights:
+  SeqCTC: 1.0
+  ConvCTC: 1.0
+
+model_args:
+  num_classes: 500
+  c2d_type: "resnet18"
+  conv_type: 2
+  use_bn: true
+  hidden_size: 256
+  loss_weights:
+    SeqCTC: 1.0
+    ConvCTC: 1.0
+  weight_norm: false
+  share_classifier: false
+  ctc_disable_cudnn: true
+  ctc_on_cpu: false
+  backward_nan_filter: false
+  decode_beam_width: 10
+  decode_num_processes: 8
+
+feeder_args:
+  datatype: "video"
+  frames: 64
+  drop_ratio: 1.0
+  use_cache: false
+  cache_dir: "./csl100/frame_cache_64"
+  cache_fallback_video: true
+
+train:
+  clip_grad: 5.0
+  ctc_zero_infinity: true
+  invalid_warn_ratio: 0.05
+  max_valid_loss: 10000
+  min_valid_loss: -0.001
+  sanitize_grad: true
+
+eval:
+  token_unit: "char"
+  fast_dev_every: 1
+  full_dev_every: 5
+  full_test_every: 5
+  fast_dev_mode: "dev_fast"
+  report_auxiliary: false
